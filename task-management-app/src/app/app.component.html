@@ -3,10 +3,9 @@
 
 <!-- Main Layout -->
 <div *ngIf="!showSplash" class="grid grid-rows-layout min-h-screen">
-  <app-navbar *ngIf="!hideNavbar()"></app-navbar>
+  <app-navbar></app-navbar>
 
-  <div class="flex-grow w-full px-4 sm:px-6 lg:px-8"
-     [ngClass]="{ 'pt-16 md:pt-16': !hideNavbar() }">
+  <div class="flex-grow w-full px-4 sm:px-6 lg:px-8 pt-16 md:pt-16">
     <router-outlet></router-outlet>
   </div>
 

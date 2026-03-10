@@ -31,6 +31,11 @@ export class NavbarComponent implements OnInit {
     return this.authService.isAuthenticated();
   }
 
+  isAuthPage(): boolean {
+  return this.router.url.startsWith('/login') ||
+         this.router.url.startsWith('/register');
+}
+
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);

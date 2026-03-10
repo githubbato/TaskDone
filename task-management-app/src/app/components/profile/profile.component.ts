@@ -35,10 +35,13 @@ export class ProfileComponent implements OnInit {
   }
 
   logout() {
-    this.auth.logout();
-    this.router.navigate(['/login']);
-  }
+  const confirmLogout = confirm('Are you sure you want to logout?');
 
+  if (!confirmLogout) return;
+
+  this.auth.logout();
+  this.router.navigate(['/']);
+}
   deleteAccount() {
     if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
       this.usersService.deleteAccount().subscribe({
