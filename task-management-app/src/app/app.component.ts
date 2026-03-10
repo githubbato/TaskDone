@@ -1,21 +1,23 @@
 import { Component, inject, OnInit, HostListener } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { FooterComponent } from './shared/footer/footer.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SplashComponent } from './core/splash/splash.component';
 import { Meta } from '@angular/platform-browser';
 import { AuthService } from './services/auth.service';
-import { NgIf } from '@angular/common';
+import { NgIf, NgClass } from '@angular/common';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FooterComponent, NavbarComponent, SplashComponent, NgIf],
+  imports: [RouterOutlet, FooterComponent, NavbarComponent, SplashComponent, NgIf, NgClass],
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
   title = 'task-management-app';
   private authService = inject(AuthService);
+  private router = inject(Router);
   meta = inject(Meta);
 
   showSplash = true;
@@ -61,6 +63,11 @@ export class AppComponent implements OnInit {
       setTimeout(() => this.hideSplash(), 3000);
     }
   }
+
+  hideNavbar(): boolean {
+  const hiddenRoutes = ['/login', '/register'];
+  return hiddenRoutes.some(route => this.router.url.startsWith(route));
+}
 
   hideSplash() {
     if (!this.showSplash) return;

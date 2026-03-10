@@ -262,7 +262,6 @@ submitMood() {
 
       // Reset mood signals
       this.mood.set(null);
-      this.moodNote.set('');
 
       // Close modal
       this.closeCongratsModal();
