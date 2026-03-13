@@ -328,7 +328,21 @@ createBarChart() {
         tooltip: { enabled: true },
       },
       scales: {
-        y: { beginAtZero: true, title: { display: true, text: 'Number of Tasks Completed', color: '#374151', font: { size: 14, weight: 'bold' } } },
+       y: { 
+  beginAtZero: true,
+  ticks: {
+    precision: 0, // removes decimals
+    callback: function(value) {
+      return Number.isInteger(value) ? value : null; // hide decimal ticks
+    }
+  },
+  title: { 
+    display: true, 
+    text: 'Number of Tasks Completed', 
+    color: '#374151', 
+    font: { size: 14, weight: 'bold' } 
+  } 
+},
         x: { title: { display: true, text: 'Month', color: '#374151', font: { size: 14, weight: 'bold' } } },
       },
     },
