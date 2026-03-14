@@ -122,8 +122,6 @@ displayRandomQuote(): void {
 loadProgressStats(): void {
   this.taskService.getProgressStats().subscribe({
     next: (response) => {
-      console.log('=== RAW RESPONSE ===', response);
-
       // =========================
       // Assign summary stats
       // =========================
@@ -134,10 +132,7 @@ loadProgressStats(): void {
       this.totalTasks = this.completedTasks + this.pendingTasks + this.overdueTasks;
 
       const tasksRaw: TaskItem[] = response.data.tasks || [];
-      console.log('=== TASKS ARRAY ===', tasksRaw);
-
       const now = new Date();
-      console.log('=== NOW ===', now);
 
       // =========================
       // Convert backend dates to JS Date objects safely
@@ -159,7 +154,6 @@ loadProgressStats(): void {
 
       const todayYMD = getLocalYMD(now);
       if (!todayYMD) {
-        console.error('Invalid current date');
         return;
       }
 
@@ -192,11 +186,6 @@ loadProgressStats(): void {
         ? Math.round((this.dailyCompleted / this.dailyCreated) * 100)
         : 0;
 
-      console.log('=== DAILY RESULTS ===');
-      console.log('Daily Created:', this.dailyCreated);
-      console.log('Daily Completed:', this.dailyCompleted);
-      console.log('Daily Completion Rate:', this.dailyCompletionRate);
-
       // =========================
       // WEEKLY REPORT
       // =========================
@@ -205,11 +194,6 @@ loadProgressStats(): void {
       this.weeklyCompletionRate = this.weeklyCreated > 0
         ? Math.round((this.weeklyCompleted / this.weeklyCreated) * 100)
         : 0;
-
-      console.log('=== WEEKLY RESULTS ===');
-      console.log('Weekly Created:', this.weeklyCreated);
-      console.log('Weekly Completed:', this.weeklyCompleted);
-      console.log('Weekly Completion Rate:', this.weeklyCompletionRate);
 
       // =========================
       // CHARTS

@@ -92,16 +92,13 @@ export class TaskListComponent implements OnInit {
   const tasks = this.allTasks();
 
   if (!user) {
-    console.log('[Badge] Waiting for user...');
     return;
   }
 
   if (!tasks || tasks.length === 0) {
-    console.log('[Badge] Waiting for tasks to load...');
     return;
   }
 
-  console.log('[Badge] Both user and tasks are ready, checking milestone...');
   this.checkBadgeMilestone(user);
 });
   }
@@ -110,7 +107,6 @@ export class TaskListComponent implements OnInit {
     this.auth.currentUser$
   .pipe(filter(isUser))
   .subscribe(user => {
-    console.log('[Badge] User loaded:', user);
     this.userSignal.set(user);
   });
     this.loadPendingTasks(this.pendingCurrentPage(), this.pendingItemsPerPage());
